@@ -98,11 +98,15 @@ PancakeSwap Router
        received: ~6.05 USDT
 ```
 
+<img width="888" height="276" alt="image" src="https://github.com/user-attachments/assets/eadc4960-2b3b-4e1a-b034-7675a5674953" />
+
 // Phase 2 — Approve NLAMM
 
 ```
 USDT.approve(NLAMM, type(uint256).max)
 ```
+
+<img width="989" height="78" alt="image" src="https://github.com/user-attachments/assets/698f7c2d-f699-4d4c-a776-1e13980098e8" />
 
 // Phase 3 — Overflow Buy + Dump (×5 tokens)
 
@@ -117,6 +121,8 @@ For each of the 5 game tokens, the attacker repeats the same pattern
                                        // dump tokens → drain USDT from pair
 ```
 
+<img width="1196" height="152" alt="image" src="https://github.com/user-attachments/assets/92fb3a46-caec-4e30-af80-2a526ea151f7" />
+
 // Phase 4 — Profit Extraction
 
 ```
@@ -124,9 +130,11 @@ USDT.transfer(profitReceiver, USDT.balanceOf(this))
   └─ 40,341.54 USDT → 0xDbCa72816b83a60f5ca7cF93a1420C6e7b215aca
 ```
 
+<img width="1769" height="128" alt="image" src="https://github.com/user-attachments/assets/43081ff2-54b0-424e-be17-e9e7f0c4b979" />
+
 ---
 
-// 4. Per-Token Breakdown
+// Per-Token Breakdown
 
 ## Overflow Details
 
@@ -154,7 +162,7 @@ Each pair was drained to dust — only ~0.008 USDT remained per pool.
 
 ---
 
-## 5. Financial Impact
+## Impact
 
 ```
 Investment:     0.01 BNB  (~6.05 USDT)
@@ -192,6 +200,8 @@ function buy(address token, uint256 id, uint256 amount) external {
 
 ### Output
 
+<img width="621" height="614" alt="image" src="https://github.com/user-attachments/assets/e0fbb2ce-0670-4aae-9f78-f1da7df3c6f6" />
+
 ```
 [PASS] testExploit()
 
@@ -213,20 +223,6 @@ function buy(address token, uint256 id, uint256 amount) external {
 ```
 
 > Note: The PoC yields ~40,368 USDT vs the original ~40,341 USDT (+0.07% delta), this is because we fork at block 82,115,369 while the original attack was mid-block 82,115,370 — other transactions earlier in the block slightly altered pool reserves.
-
----
-
-## 9. Attack Transaction Summary
-
-```
-Block:              82,115,370
-Chain:              BNB Smart Chain (BSC)
-Attacker EOA:       0xDbCa72816b83a60f5ca7cF93a1420C6e7b215aca
-Attack Contract:    0x23E5DE4a390702B1ff6dA7Fd0b0F17B79F8Eee1A
-Target (NLAMM):     0x5340a7278848EE51D35c30693D6FBFf06d1a0d73
-Gas Used:           1,434,392
-Profit:             ~40,335 USDT
-```
 
 ### Call Graph
 
